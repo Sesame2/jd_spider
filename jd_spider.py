@@ -1,10 +1,14 @@
 """
 这是一个京东评论爬虫
 """
-from data_define import Record
-import requests
-import json
 import csv
+import json
+
+import pandas as pd
+import requests
+
+from data_define import Record
+
 
 class Spider:
     url = None  # 请求链接
@@ -65,7 +69,7 @@ class Spider:
                 print(i)
 
     def csv_write(self):
-        f = open(f"./{self.productId}的评论.csv", "a", encoding="utf8")
+        f = open(f"./{self.productId}的评论.csv", "w", encoding="utf8")
         write = csv.writer(f)
         head = ["ID", "score", "content"]
         write.writerow(head)
@@ -78,6 +82,5 @@ class Spider:
 
 
 if __name__ == '__main__':
-    jd_spider = Spider(productId=100038004369, score=2)
-    # jd_spider.data_print()
-    jd_spider.csv_write()
+    df1 = pd.read_csv("./10052999059796的评论.csv")
+    print(df1.head(645))
